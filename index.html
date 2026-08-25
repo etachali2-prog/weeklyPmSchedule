@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +38,9 @@
             margin-bottom: 25px;
         }
 
-        /* Controls */
+        /* =========================
+           CONTROLS
+        ========================= */
 
         .controls {
             background: white;
@@ -58,12 +61,13 @@
             border-radius: 6px;
         }
 
-        /* Schedule */
+        /* =========================
+           SCHEDULE
+        ========================= */
 
         .schedule {
             display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
         }
 
@@ -71,9 +75,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-
-            box-shadow:
-                0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .week h2 {
@@ -87,17 +89,16 @@
             margin-bottom: 18px;
         }
 
-        /* Machine */
+        /* =========================
+           MACHINE
+        ========================= */
 
         .machine {
             background: #f9fafb;
             padding: 15px;
             margin-bottom: 12px;
-
             border-left: 5px solid #f59e0b;
             border-radius: 7px;
-
-            transition: 0.2s;
         }
 
         .machine.completed {
@@ -132,20 +133,18 @@
             color: #16a34a;
         }
 
-        /* Button */
+        /* =========================
+           BUTTON
+        ========================= */
 
         .complete-btn {
             margin-top: 10px;
             padding: 8px 14px;
-
             border: none;
             border-radius: 5px;
-
             background: #2563eb;
             color: white;
-
             cursor: pointer;
-
             font-size: 14px;
         }
 
@@ -161,22 +160,19 @@
             background: #4b5563;
         }
 
-        /* Summary */
+        /* =========================
+           SUMMARY
+        ========================= */
 
         .summary {
             margin-top: 25px;
-
             background: white;
             padding: 20px;
-
             border-radius: 10px;
-
             display: flex;
             justify-content: space-around;
             text-align: center;
-
-            box-shadow:
-                0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .summary-item {
@@ -185,16 +181,15 @@
 
         .number {
             display: block;
-
             font-size: 30px;
             font-weight: bold;
-
             color: #2563eb;
-
             margin-bottom: 5px;
         }
 
-        /* Responsive */
+        /* =========================
+           RESPONSIVE
+        ========================= */
 
         @media (max-width: 600px) {
 
@@ -215,12 +210,15 @@
         }
     </style>
 </head>
- <a href="https://etachali2-prog.github.io/all/">Back</a>
+
+
 <body>
 
 <div class="container">
 
-    <h1>Machine Maintenance Scheduler</h1>
+    <h1>
+        Machine Maintenance Scheduler
+    </h1>
 
     <p class="subtitle">
         15 Machines • 3 Machines Per Week • Weekdays Only
@@ -299,6 +297,17 @@
 
 
 <script>
+
+/* =====================================================
+   PASSWORD
+===================================================== */
+
+/*
+    YOUR PASSWORD IS 123
+*/
+
+const PASSWORD = "123";
+
 
 /* =====================================================
    MACHINE SETTINGS
@@ -388,12 +397,9 @@ const MACHINES = [
    SETTINGS
 ===================================================== */
 
-const TOTAL_MACHINES =
-    MACHINES.length;
-
+const TOTAL_MACHINES = MACHINES.length;
 
 const MACHINES_PER_WEEK = 3;
-
 
 const TOTAL_WEEKS =
     Math.ceil(
@@ -428,14 +434,13 @@ let maintenanceStatus =
 
 
 /* =====================================================
-   HTML ELEMENTS
+   ELEMENTS
 ===================================================== */
 
 const scheduleElement =
     document.getElementById(
         "schedule"
     );
-
 
 const startDateInput =
     document.getElementById(
@@ -447,13 +452,27 @@ const startDateInput =
    TODAY
 ===================================================== */
 
-const today =
-    new Date();
+const today = new Date();
 
-
-startDateInput.value =
+const todayString =
     today.toISOString()
         .split("T")[0];
+
+
+/*
+    Set today's date.
+*/
+
+startDateInput.value =
+    todayString;
+
+
+/*
+    Save current valid date.
+*/
+
+startDateInput.dataset.previousDate =
+    todayString;
 
 
 /* =====================================================
@@ -462,8 +481,7 @@ startDateInput.value =
 
 function isWeekend(date) {
 
-    const day =
-        date.getDay();
+    const day = date.getDay();
 
     return (
         day === 0 ||
@@ -484,7 +502,6 @@ function getNextWeekday(date) {
         result.setDate(
             result.getDate() + 1
         );
-
     }
 
     return result;
@@ -512,17 +529,13 @@ function getMonday(date) {
             result.getDate() -
             (day - 1)
         );
-
     }
 
     return result;
 }
 
 
-function addDays(
-    date,
-    days
-) {
+function addDays(date, days) {
 
     const result =
         new Date(date);
@@ -546,7 +559,54 @@ function formatDate(date) {
             day: "numeric"
         }
     );
+}
 
+
+/* =====================================================
+   PASSWORD CHECK
+===================================================== */
+
+function checkPassword(message) {
+
+    /*
+        THIS IS THE IMPORTANT FIX.
+
+        The password entered by the user
+        is stored in the variable.
+    */
+
+    const enteredPassword =
+        prompt(message);
+
+
+    /*
+        User pressed Cancel.
+    */
+
+    if (enteredPassword === null) {
+
+        return false;
+    }
+
+
+    /*
+        Compare entered password
+        with the correct password.
+    */
+
+    if (
+        enteredPassword !== PASSWORD
+    ) {
+
+        alert(
+            "Incorrect password!"
+        );
+
+        return false;
+    }
+
+
+    return true;
 }
 
 
@@ -578,11 +638,6 @@ function generateSchedule() {
         week++
     ) {
 
-
-        /* ---------------------------------------------
-           WEEK DATES
-        --------------------------------------------- */
-
         const monday =
             addDays(
                 firstMonday,
@@ -596,10 +651,6 @@ function generateSchedule() {
                 4
             );
 
-
-        /* ---------------------------------------------
-           WEEK CARD
-        --------------------------------------------- */
 
         const weekCard =
             document.createElement(
@@ -626,25 +677,16 @@ function generateSchedule() {
         `;
 
 
-        /* ---------------------------------------------
-           MACHINE INDEX
-        --------------------------------------------- */
-
         const firstMachineIndex =
             (week - 1) *
             MACHINES_PER_WEEK;
 
-
-        /* ---------------------------------------------
-           CREATE MACHINE CARDS
-        --------------------------------------------- */
 
         for (
             let i = 0;
             i < MACHINES_PER_WEEK;
             i++
         ) {
-
 
             const machineIndex =
                 firstMachineIndex + i;
@@ -656,19 +698,16 @@ function generateSchedule() {
             ) {
 
                 break;
-
             }
 
 
             const machine =
-                MACHINES[
-                    machineIndex
-                ];
+                MACHINES[machineIndex];
 
 
-            /* -----------------------------------------
-               MAINTENANCE DATE
-            ----------------------------------------- */
+            /*
+                Calculate maintenance date.
+            */
 
             const dayOffset =
                 MAINTENANCE_DAYS[i] - 1;
@@ -691,13 +730,12 @@ function generateSchedule() {
                     getNextWeekday(
                         maintenanceDate
                     );
-
             }
 
 
-            /* -----------------------------------------
-               STATUS
-            ----------------------------------------- */
+            /*
+                Check status.
+            */
 
             const completed =
                 maintenanceStatus[
@@ -705,9 +743,9 @@ function generateSchedule() {
                 ] === true;
 
 
-            /* -----------------------------------------
-               MACHINE CARD
-            ----------------------------------------- */
+            /*
+                Create card.
+            */
 
             const machineCard =
                 document.createElement(
@@ -721,9 +759,9 @@ function generateSchedule() {
                     : "machine";
 
 
-            /* -----------------------------------------
-               MACHINE NAME
-            ----------------------------------------- */
+            /*
+                Machine name.
+            */
 
             const machineName =
                 document.createElement(
@@ -739,9 +777,9 @@ function generateSchedule() {
                 machine.name;
 
 
-            /* -----------------------------------------
-               MAINTENANCE DAY
-            ----------------------------------------- */
+            /*
+                Day.
+            */
 
             const maintenanceDay =
                 document.createElement(
@@ -762,9 +800,9 @@ function generateSchedule() {
                 );
 
 
-            /* -----------------------------------------
-               MAINTENANCE DATE
-            ----------------------------------------- */
+            /*
+                Date.
+            */
 
             const maintenanceDateElement =
                 document.createElement(
@@ -787,9 +825,9 @@ function generateSchedule() {
                 );
 
 
-            /* -----------------------------------------
-               STATUS TEXT
-            ----------------------------------------- */
+            /*
+                Status.
+            */
 
             const status =
                 document.createElement(
@@ -807,9 +845,9 @@ function generateSchedule() {
                     : "⚠ Maintenance Pending";
 
 
-            /* -----------------------------------------
-               BUTTON
-            ----------------------------------------- */
+            /*
+                Button.
+            */
 
             const button =
                 document.createElement(
@@ -834,14 +872,11 @@ function generateSchedule() {
 
                 button.textContent =
                     "Mark Completed";
-
             }
 
 
             /*
-                IMPORTANT:
-                Use addEventListener instead
-                of inline onclick.
+                Button action.
             */
 
             button.addEventListener(
@@ -856,9 +891,9 @@ function generateSchedule() {
             );
 
 
-            /* -----------------------------------------
-               ADD ELEMENTS
-            ----------------------------------------- */
+            /*
+                Add everything.
+            */
 
             machineCard.appendChild(
                 machineName
@@ -884,44 +919,76 @@ function generateSchedule() {
             weekCard.appendChild(
                 machineCard
             );
-
         }
 
 
         scheduleElement.appendChild(
             weekCard
         );
-
     }
 
 
     updateSummary();
-
 }
 
 
 /* =====================================================
-   COMPLETE / UNDO MAINTENANCE
+   COMPLETE / UNDO
 ===================================================== */
 
-function toggleMaintenance(
-    machineId
-) {
+function toggleMaintenance(machineId) {
+
+    const isCompleted =
+        maintenanceStatus[
+            machineId
+        ] === true;
+
 
     /*
-        Toggle current status.
+        ==============================
+        UNDO
+        ==============================
+
+        Undo does not require password.
     */
 
-    maintenanceStatus[
-        machineId
-    ] =
-        !maintenanceStatus[
+    if (isCompleted) {
+
+        maintenanceStatus[
             machineId
-        ];
+        ] = false;
+
+    }
 
 
     /*
-        Save to browser.
+        ==============================
+        MARK COMPLETED
+        ==============================
+    */
+
+    else {
+
+        const passwordCorrect =
+            checkPassword(
+                "Enter maintenance password:"
+            );
+
+
+        if (!passwordCorrect) {
+
+            return;
+        }
+
+
+        maintenanceStatus[
+            machineId
+        ] = true;
+    }
+
+
+    /*
+        Save.
     */
 
     localStorage.setItem(
@@ -933,11 +1000,10 @@ function toggleMaintenance(
 
 
     /*
-        Refresh the schedule.
+        Refresh.
     */
 
     generateSchedule();
-
 }
 
 
@@ -973,17 +1039,62 @@ function updateSummary() {
     ).textContent =
         TOTAL_MACHINES -
         completed;
-
 }
 
 
 /* =====================================================
-   DATE CHANGE
+   START DATE PASSWORD PROTECTION
 ===================================================== */
 
 startDateInput.addEventListener(
     "change",
-    generateSchedule
+    function() {
+
+        /*
+            New date selected.
+        */
+
+        const newDate =
+            startDateInput.value;
+
+
+        /*
+            Ask for password.
+        */
+
+        const passwordCorrect =
+            checkPassword(
+                "Enter password to change the maintenance start date:"
+            );
+
+
+        /*
+            Incorrect password.
+        */
+
+        if (!passwordCorrect) {
+
+            startDateInput.value =
+                startDateInput.dataset.previousDate;
+
+            return;
+        }
+
+
+        /*
+            Correct password.
+        */
+
+        startDateInput.dataset.previousDate =
+            newDate;
+
+
+        /*
+            Generate new schedule.
+        */
+
+        generateSchedule();
+    }
 );
 
 
