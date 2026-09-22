@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -11,252 +9,272 @@
 
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    background: #f3f4f6;
-    color: #1f2937;
-    padding: 30px;
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#eef3f8;
+    color:#222;
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:25px auto;
 }
 
-/* =========================
-   BACK LINK
-========================= */
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 9px 15px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
+.header{
+    background:#1f4e78;
+    color:white;
+    padding:22px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
-.back-link:hover {
-    background: #1d4ed8;
+.header h1{
+    margin:0;
+    font-size:28px;
 }
 
-/* =========================
-   TITLE
-========================= */
-
-h1 {
-    text-align: center;
-    margin-bottom: 8px;
-    color: #111827;
+.header p{
+    margin:8px 0 0;
+    font-size:15px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #6b7280;
-    margin-bottom: 25px;
+.back{
+    display:inline-block;
+    margin-bottom:15px;
+    text-decoration:none;
+    color:#1f4e78;
+    font-weight:bold;
 }
 
-/* =========================
-   CONTROLS
-========================= */
-
-.controls {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.control-box{
+    background:white;
+    margin-top:20px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
 }
 
-.controls label {
-    font-weight: bold;
+.control-box h2{
+    margin-top:0;
+    color:#1f4e78;
 }
 
-.controls input {
-    padding: 10px 12px;
-    margin-left: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 15px;
-    width: 160px;
+.date-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
 }
 
-.controls input:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+.date-row label{
+    font-weight:bold;
 }
 
-.date-help {
-    margin-top: 8px;
-    margin-left: 165px;
-    color: #6b7280;
-    font-size: 13px;
+.date-row input{
+    width:180px;
+    padding:11px;
+    border:1px solid #bbb;
+    border-radius:7px;
+    font-size:16px;
 }
 
-/* =========================
-   SCHEDULE
-========================= */
-
-.schedule {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(320px, 1fr)
-    );
-    gap: 20px;
+button{
+    border:none;
+    border-radius:7px;
+    padding:10px 16px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-/* =========================
-   WEEK
-========================= */
-
-.week {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.generate-btn{
+    background:#198754;
+    color:white;
 }
 
-.week h2 {
-    color: #2563eb;
-    margin-bottom: 5px;
+.clear-btn{
+    background:#dc3545;
+    color:white;
 }
 
-.week-date {
-    color: #6b7280;
-    font-size: 14px;
-    margin-bottom: 18px;
+.info{
+    margin-top:12px;
+    padding:10px;
+    background:#e8f3ff;
+    border-left:4px solid #1f4e78;
+    border-radius:5px;
+    font-size:14px;
 }
 
-/* =========================
-   MACHINE
-========================= */
-
-.machine {
-    background: #f9fafb;
-    padding: 15px;
-    margin-bottom: 12px;
-    border-left: 5px solid #f59e0b;
-    border-radius: 7px;
+.scheduler{
+    margin-top:20px;
 }
 
-.machine.completed {
-    background: #f0fdf4;
-    border-left-color: #16a34a;
+.week{
+    background:white;
+    margin-bottom:20px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
 }
 
-.machine-name {
-    font-size: 18px;
-    font-weight: bold;
+.week-header{
+    background:#1f4e78;
+    color:white;
+    padding:14px 18px;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.maintenance-day {
-    color: #2563eb;
-    font-weight: bold;
-    margin-top: 6px;
+.machine-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    padding:15px;
 }
 
-.maintenance-date {
-    color: #6b7280;
-    font-size: 13px;
-    margin-top: 4px;
+.machine-card{
+    border:1px solid #d5dce3;
+    border-radius:10px;
+    padding:15px;
+    background:#fafafa;
+    position:relative;
 }
 
-.status {
-    font-size: 13px;
-    margin-top: 8px;
-    color: #f59e0b;
+.machine-name{
+    font-size:18px;
+    font-weight:bold;
+    color:#1f4e78;
+    margin-bottom:8px;
 }
 
-.completed .status {
-    color: #16a34a;
+.machine-date{
+    font-size:14px;
+    margin-bottom:12px;
+    color:#555;
 }
 
-/* =========================
-   BUTTON
-========================= */
-
-.complete-btn {
-    margin-top: 10px;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 5px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
+.status{
+    font-weight:bold;
+    margin-bottom:10px;
 }
 
-.complete-btn:hover {
-    background: #1d4ed8;
+.pending{
+    color:#dc3545;
 }
 
-.complete-btn.undo {
-    background: #6b7280;
+.completed{
+    color:#198754;
 }
 
-.complete-btn.undo:hover {
-    background: #4b5563;
+.complete-btn{
+    background:#198754;
+    color:white;
+    width:100%;
 }
 
-/* =========================
-   SUMMARY
-========================= */
-
-.summary {
-    margin-top: 25px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.undo-btn{
+    background:#6c757d;
+    color:white;
+    width:100%;
 }
 
-.summary-item {
-    min-width: 150px;
+.no-schedule{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    color:#666;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
 }
 
-.number {
-    display: block;
-    font-size: 30px;
-    font-weight: bold;
-    color: #2563eb;
-    margin-bottom: 5px;
+.footer{
+    text-align:center;
+    margin:25px 0;
+    color:#666;
+    font-size:13px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* PASSWORD MODAL */
 
-@media (max-width: 600px) {
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+    align-items:center;
+    justify-content:center;
+}
 
-    body {
-        padding: 15px;
+.modal-box{
+    background:white;
+    width:90%;
+    max-width:360px;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+.modal-box h3{
+    margin-top:0;
+    color:#1f4e78;
+}
+
+.modal-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #bbb;
+    border-radius:7px;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.modal-buttons button{
+    flex:1;
+}
+
+.ok-btn{
+    background:#198754;
+    color:white;
+}
+
+.cancel-btn{
+    background:#6c757d;
+    color:white;
+}
+
+.error{
+    color:#dc3545;
+    font-size:14px;
+    margin-bottom:10px;
+    display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .machine-grid{
+        grid-template-columns:1fr;
     }
 
-    .summary {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .controls input {
-        margin-left: 0;
-        margin-top: 10px;
-        display: block;
-    }
-
-    .date-help {
-        margin-left: 0;
+    .header h1{
+        font-size:23px;
     }
 
 }
@@ -265,609 +283,693 @@ h1 {
 
 </head>
 
-
 <body>
-
-
-<a
-    class="back-link"
-    href="https://etachali2-prog.github.io/all/"
->
-    ← Back
-</a>
-
 
 <div class="container">
 
+    <a class="back" href="https://etachali2-prog.github.io/all/">
+        ← Back
+    </a>
 
-<h1>
-    Machine Maintenance Scheduler
-</h1>
+    <div class="header">
+
+        <h1>Machine Maintenance Scheduler</h1>
+
+        <p>
+            15 Machines • 3 Machines Per Week • Monday / Wednesday / Friday
+        </p>
+
+        <p>
+            Ethiopian Calendar (E.C.)
+        </p>
+
+    </div>
 
 
-<p class="subtitle">
-    15 Machines • 3 Machines Per Week • Weekdays Only
-</p>
+    <!-- DATE CONTROL -->
+
+    <div class="control-box">
+
+        <h2>Maintenance Start Date</h2>
+
+        <div class="date-row">
+
+            <label for="startDate">
+                Start Date:
+            </label>
+
+            <input
+                type="text"
+                id="startDate"
+                placeholder="DD/MM/YYYY"
+                maxlength="10"
+                autocomplete="off"
+            >
+
+            <button
+                class="generate-btn"
+                onclick="generateSchedule()">
+                Generate Schedule
+            </button>
+
+            <button
+                class="clear-btn"
+                onclick="clearSchedule()">
+                Clear
+            </button>
+
+        </div>
+
+        <div class="info">
+
+            Enter the date using the Ethiopian calendar.
+
+            <br>
+
+            Example:
+            <strong>01/01/2018</strong>
+            = 1 Meskerem 2018 E.C.
+
+            <br>
+
+            The schedule uses Monday, Wednesday and Friday.
+
+        </div>
+
+    </div>
 
 
-<!-- =================================================
-     MANUAL START DATE
-================================================== -->
+    <!-- SCHEDULE -->
 
-<div class="controls">
+    <div
+        id="scheduler"
+        class="scheduler">
+    </div>
 
-    <label for="startDate">
-        Schedule Start Date:
-    </label>
 
-    <!--
-        NORMAL TEXT INPUT
-        NO CALENDAR
-    -->
-
-    <input
-        type="text"
-        id="startDate"
-        placeholder="DD/MM/YYYY"
-        maxlength="10"
-        autocomplete="off"
-    >
-
-    <div class="date-help">
-        Enter date manually, for example: 01/10/2026
+    <div class="footer">
+        Machine Maintenance Scheduler • Ethiopian Calendar
     </div>
 
 </div>
 
 
-<!-- =================================================
-     SCHEDULE
-================================================== -->
+<!-- PASSWORD MODAL -->
 
 <div
-    id="schedule"
-    class="schedule"
->
-</div>
+    id="passwordModal"
+    class="modal">
 
+    <div class="modal-box">
 
-<!-- =================================================
-     SUMMARY
-================================================== -->
+        <h3>
+            Maintenance Completion
+        </h3>
 
-<div class="summary">
+        <p>
+            Enter password to mark this maintenance as completed.
+        </p>
 
-
-    <div class="summary-item">
-
-        <span
-            id="total"
-            class="number"
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter password"
+            autocomplete="off"
         >
-            15
-        </span>
 
-        Total Machines
+        <div
+            id="passwordError"
+            class="error">
+            Incorrect password.
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                class="ok-btn"
+                onclick="checkPassword()">
+                Confirm
+            </button>
+
+            <button
+                class="cancel-btn"
+                onclick="closePasswordModal()">
+                Cancel
+            </button>
+
+        </div>
 
     </div>
-
-
-    <div class="summary-item">
-
-        <span
-            id="completed"
-            class="number"
-        >
-            0
-        </span>
-
-        Completed
-
-    </div>
-
-
-    <div class="summary-item">
-
-        <span
-            id="pending"
-            class="number"
-        >
-            15
-        </span>
-
-        Pending
-
-    </div>
-
-
-</div>
-
 
 </div>
 
 
 <script>
 
+/* =========================================================
+   MACHINE LIST
+========================================================= */
 
-/* =====================================================
-   PASSWORD
-===================================================== */
+const machines = [
+
+    "TBO1",
+
+    "TBO2",
+
+    "KOLBUS (ONLINE)",
+
+    "KOLBUS (OFFLINE)",
+
+    "OSAKO",
+
+    "THREE KNIFE",
+
+    "SAKURAI UNIT 2",
+
+    "SAKURAI UNIT 1 - A",
+
+    "SAKURAI UNIT 1 - B",
+
+    "LAMINATING MACHINE",
+
+    "SINGLE KNIFE",
+
+    "CTP",
+
+    "GENERATOR",
+
+    "KOMPRESSOR (WEB)",
+
+    "KOMPRESSOR (KOLBUS)"
+
+];
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
 
 const PASSWORD = "123";
 
-
-/* =====================================================
-   MACHINE LIST
-===================================================== */
-
-const MACHINES = [
-
-    {
-        id: "TBO1",
-        name: "TBO1"
-    },
-
-    {
-        id: "TBO2",
-        name: "TBO2"
-    },
-
-    {
-        id: "KOLBUS_ONLINE",
-        name: "KOLBUS (ONLINE)"
-    },
-
-    {
-        id: "KOLBUS_OFFLINE",
-        name: "KOLBUS (OFFLINE)"
-    },
-
-    {
-        id: "OSAKO",
-        name: "OSAKO"
-    },
-
-    {
-        id: "THREE_KNIFE",
-        name: "THREE KNIFE"
-    },
-
-    {
-        id: "SAKURAI_UNIT_2",
-        name: "SAKURAI UNIT 2"
-    },
-
-    {
-        id: "SAKURAI_UNIT_1_A",
-        name: "SAKURAI UNIT 1 - A"
-    },
-
-    {
-        id: "SAKURAI_UNIT_1_B",
-        name: "SAKURAI UNIT 1 - B"
-    },
-
-    {
-        id: "LAMINATING_MACHINE",
-        name: "LAMINATING MACHINE"
-    },
-
-    {
-        id: "SINGLE_KNIFE",
-        name: "SINGLE KNIFE"
-    },
-
-    {
-        id: "CTP",
-        name: "CTP"
-    },
-
-    {
-        id: "GENERATOR",
-        name: "GENERATOR"
-    },
-
-    {
-        id: "KOMPRESSOR_WEB",
-        name: "KOMPRESSOR (WEB)"
-    },
-
-    {
-        id: "KOMPRESSOR_KOLBUS",
-        name: "KOMPRESSOR (KOLBUS)"
-    }
-
+const MAINTENANCE_DAYS = [
+    1, 3, 5
 ];
-
-
-/* =====================================================
-   SETTINGS
-===================================================== */
-
-const TOTAL_MACHINES =
-    MACHINES.length;
-
-const MACHINES_PER_WEEK = 3;
-
-const TOTAL_WEEKS =
-    Math.ceil(
-        TOTAL_MACHINES /
-        MACHINES_PER_WEEK
-    );
-
 
 /*
-    Maintenance days:
-
-    Monday
-    Wednesday
-    Friday
+Monday    = 1
+Wednesday = 3
+Friday    = 5
 */
 
-const MAINTENANCE_DAYS = [
-    1,
-    3,
-    5
+
+/* =========================================================
+   ETHIOPIAN MONTH NAMES
+========================================================= */
+
+const ethiopianMonths = [
+
+    "Meskerem",
+
+    "Tikimt",
+
+    "Hidar",
+
+    "Tahsas",
+
+    "Tir",
+
+    "Yekatit",
+
+    "Megabit",
+
+    "Miyazya",
+
+    "Ginbot",
+
+    "Sene",
+
+    "Hamle",
+
+    "Nehasse",
+
+    "Pagume"
+
 ];
 
 
-/* =====================================================
+/* =========================================================
    LOCAL STORAGE
-===================================================== */
+========================================================= */
 
 let maintenanceStatus =
     JSON.parse(
-        localStorage.getItem(
-            "maintenanceStatus"
+        localStorage.getItem("maintenanceStatus") || "{}"
+    );
+
+let selectedMachineKey = null;
+
+
+/* =========================================================
+   ETHIOPIAN LEAP YEAR
+========================================================= */
+
+function isEthiopianLeapYear(year){
+
+    return year % 4 === 3;
+
+}
+
+
+/* =========================================================
+   ETHIOPIAN DATE VALIDATION
+========================================================= */
+
+function isValidEthiopianDate(day, month, year){
+
+    if(
+        !Number.isInteger(day) ||
+        !Number.isInteger(month) ||
+        !Number.isInteger(year)
+    ){
+        return false;
+    }
+
+    if(year < 1){
+        return false;
+    }
+
+    if(month < 1 || month > 13){
+        return false;
+    }
+
+    /*
+       Months 1-12 have 30 days.
+    */
+
+    if(month <= 12){
+
+        return day >= 1 && day <= 30;
+
+    }
+
+    /*
+       Pagume has 5 days,
+       or 6 days in Ethiopian leap year.
+    */
+
+    const maxPagumeDays =
+        isEthiopianLeapYear(year) ? 6 : 5;
+
+    return day >= 1 && day <= maxPagumeDays;
+
+}
+
+
+/* =========================================================
+   PARSE ETHIOPIAN DATE
+   DD/MM/YYYY
+========================================================= */
+
+function parseEthiopianDate(value){
+
+    value = value.trim();
+
+    const parts = value.split("/");
+
+    if(parts.length !== 3){
+
+        return null;
+
+    }
+
+    const day =
+        parseInt(parts[0],10);
+
+    const month =
+        parseInt(parts[1],10);
+
+    const year =
+        parseInt(parts[2],10);
+
+    if(
+        !isValidEthiopianDate(
+            day,
+            month,
+            year
         )
-    ) || {};
+    ){
 
+        return null;
 
-let savedStartDate =
-    localStorage.getItem(
-        "maintenanceStartDate"
-    ) || "";
+    }
 
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const scheduleElement =
-    document.getElementById(
-        "schedule"
-    );
-
-
-const startDateInput =
-    document.getElementById(
-        "startDate"
-    );
-
-
-/* =====================================================
-   LOAD SAVED DATE
-===================================================== */
-
-if (savedStartDate) {
-
-    startDateInput.value =
-        savedStartDate;
-
-    startDateInput.dataset.previousDate =
-        savedStartDate;
-
-}
-
-else {
-
-    startDateInput.value = "";
-
-    startDateInput.dataset.previousDate =
-        "";
+    return {
+        day: day,
+        month: month,
+        year: year
+    };
 
 }
 
 
-/* =====================================================
-   DATE VALIDATION
-===================================================== */
+/* =========================================================
+   ETHIOPIAN YEAR START
+=========================================================
 
-function isValidDateFormat(dateString) {
+   Ethiopian year Y starts around September 11/12
+   in Gregorian year Y + 7.
 
-    /*
-        Required format:
+   If Ethiopian year Y is divisible by 4,
+   its New Year starts on September 12.
 
-        DD/MM/YYYY
+========================================================= */
 
-        Example:
+function ethiopianNewYearGregorian(year){
 
-        01/10/2026
-    */
+    const gregorianYear =
+        year + 7;
 
-    const pattern =
-        /^(\d{2})\/(\d{2})\/(\d{4})$/;
-
-
-    const match =
-        dateString.match(pattern);
-
-
-    if (!match) {
-
-        return false;
-
-    }
-
-
-    const day =
-        parseInt(match[1], 10);
-
-    const month =
-        parseInt(match[2], 10);
-
-    const year =
-        parseInt(match[3], 10);
-
-
-    /*
-        Basic range checking.
-    */
-
-    if (
-        month < 1 ||
-        month > 12
-    ) {
-
-        return false;
-
-    }
-
-
-    if (
-        day < 1 ||
-        day > 31
-    ) {
-
-        return false;
-
-    }
-
-
-    /*
-        Create date and verify it.
-    */
-
-    const date =
-        new Date(
-            year,
-            month - 1,
-            day
-        );
-
-
-    return (
-        date.getFullYear() === year &&
-        date.getMonth() === month - 1 &&
-        date.getDate() === day
-    );
-
-}
-
-
-/* =====================================================
-   CONVERT DD/MM/YYYY TO JAVASCRIPT DATE
-===================================================== */
-
-function convertToDate(dateString) {
-
-    const parts =
-        dateString.split("/");
-
-
-    const day =
-        parseInt(parts[0], 10);
-
-    const month =
-        parseInt(parts[1], 10);
-
-    const year =
-        parseInt(parts[2], 10);
-
+    const septemberDay =
+        (year % 4 === 0) ? 12 : 11;
 
     return new Date(
-        year,
-        month - 1,
-        day
+        Date.UTC(
+            gregorianYear,
+            8,
+            septemberDay
+        )
     );
 
 }
 
 
-/* =====================================================
-   DATE FUNCTIONS
-===================================================== */
+/* =========================================================
+   ETHIOPIAN → GREGORIAN
+========================================================= */
 
-function isWeekend(date) {
+function ethiopianToGregorian(
+    day,
+    month,
+    year
+){
+
+    const start =
+        ethiopianNewYearGregorian(year);
+
+    let daysToAdd = 0;
+
+    if(month <= 12){
+
+        /*
+           Each normal Ethiopian month
+           contains 30 days.
+        */
+
+        daysToAdd =
+            (month - 1) * 30
+            + (day - 1);
+
+    }
+    else{
+
+        /*
+           Pagume
+        */
+
+        daysToAdd =
+            12 * 30
+            + (day - 1);
+
+    }
+
+    const result =
+        new Date(start.getTime());
+
+    result.setUTCDate(
+        result.getUTCDate() + daysToAdd
+    );
+
+    return result;
+
+}
+
+
+/* =========================================================
+   GREGORIAN → ETHIOPIAN
+========================================================= */
+
+function gregorianToEthiopian(date){
+
+    /*
+       Determine the approximate Ethiopian year.
+    */
+
+    const gYear =
+        date.getUTCFullYear();
+
+    const gMonth =
+        date.getUTCMonth();
+
+    const gDay =
+        date.getUTCDate();
+
+    let eYear =
+        gYear - 7;
+
+    /*
+       Before Ethiopian New Year,
+       Gregorian Jan-Sep usually belongs
+       to previous Ethiopian year.
+    */
+
+    const possibleNewYear =
+        ethiopianNewYearGregorian(eYear);
+
+    if(date < possibleNewYear){
+
+        eYear--;
+
+    }
+
+    const newYear =
+        ethiopianNewYearGregorian(eYear);
+
+    const difference =
+        Math.floor(
+            (
+                date.getTime()
+                -
+                newYear.getTime()
+            )
+            /
+            (1000 * 60 * 60 * 24)
+        );
+
+    let eMonth;
+    let eDay;
+
+    if(difference < 360){
+
+        eMonth =
+            Math.floor(difference / 30) + 1;
+
+        eDay =
+            (difference % 30) + 1;
+
+    }
+    else{
+
+        eMonth = 13;
+
+        eDay =
+            difference - 360 + 1;
+
+    }
+
+    return {
+
+        day: eDay,
+
+        month: eMonth,
+
+        year: eYear
+
+    };
+
+}
+
+
+/* =========================================================
+   FORMAT ETHIOPIAN DATE
+========================================================= */
+
+function formatEthiopianDate(eDate){
 
     const day =
-        date.getDay();
+        String(eDate.day).padStart(2,"0");
+
+    const monthName =
+        ethiopianMonths[eDate.month - 1];
 
     return (
-        day === 0 ||
-        day === 6
+        day
+        + " "
+        + monthName
+        + " "
+        + eDate.year
+        + " E.C."
     );
 
 }
 
 
-function getNextWeekday(date) {
+/* =========================================================
+   GET WEEKDAY NAME
+========================================================= */
 
-    const result =
-        new Date(date);
+function getWeekdayName(date){
 
+    const names = [
 
-    while (
-        isWeekend(result)
-    ) {
+        "Sunday",
 
-        result.setDate(
-            result.getDate() + 1
-        );
+        "Monday",
 
-    }
+        "Tuesday",
 
+        "Wednesday",
 
-    return result;
+        "Thursday",
+
+        "Friday",
+
+        "Saturday"
+
+    ];
+
+    return names[
+        date.getUTCDay()
+    ];
 
 }
 
 
-function getMonday(date) {
+/* =========================================================
+   GET MONDAY OF WEEK
+========================================================= */
+
+function getMonday(date){
 
     const result =
-        new Date(date);
-
+        new Date(date.getTime());
 
     const day =
-        result.getDay();
+        result.getUTCDay();
 
+    /*
+       Sunday = 0
+       Monday = 1
+    */
 
-    if (day === 0) {
+    const difference =
+        day === 0
+        ? -6
+        : 1 - day;
 
-        result.setDate(
-            result.getDate() - 6
-        );
-
-    }
-
-    else {
-
-        result.setDate(
-            result.getDate() -
-            (day - 1)
-        );
-
-    }
-
-
-    return result;
-
-}
-
-
-function addDays(date, days) {
-
-    const result =
-        new Date(date);
-
-
-    result.setDate(
-        result.getDate() + days
+    result.setUTCDate(
+        result.getUTCDate() + difference
     );
 
+    return result;
+
+}
+
+
+/* =========================================================
+   ADD DAYS
+========================================================= */
+
+function addDays(date, days){
+
+    const result =
+        new Date(date.getTime());
+
+    result.setUTCDate(
+        result.getUTCDate() + days
+    );
 
     return result;
 
 }
 
 
-function formatDate(date) {
+/* =========================================================
+   FORMAT INPUT
+========================================================= */
 
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            weekday: "long",
-            year: "numeric",
-            month: "short",
-            day: "numeric"
+document
+    .getElementById("startDate")
+    .addEventListener(
+        "input",
+        function(){
+
+            let value =
+                this.value.replace(
+                    /[^0-9]/g,
+                    ""
+                );
+
+            if(value.length > 2){
+
+                value =
+                    value.substring(0,2)
+                    + "/"
+                    + value.substring(2);
+
+            }
+
+            if(value.length > 5){
+
+                value =
+                    value.substring(0,5)
+                    + "/"
+                    + value.substring(5);
+
+            }
+
+            if(value.length > 10){
+
+                value =
+                    value.substring(0,10);
+
+            }
+
+            this.value = value;
+
         }
     );
 
-}
 
+/* =========================================================
+   GENERATE SCHEDULE
+========================================================= */
 
-/* =====================================================
-   PASSWORD
-===================================================== */
+function generateSchedule(){
 
-function checkPassword(message) {
+    const input =
+        document
+        .getElementById("startDate")
+        .value;
 
-    const enteredPassword =
-        prompt(message);
+    const eDate =
+        parseEthiopianDate(input);
 
-
-    /*
-        Cancel
-    */
-
-    if (
-        enteredPassword === null
-    ) {
-
-        return false;
-
-    }
-
-
-    /*
-        Wrong password
-    */
-
-    if (
-        enteredPassword !== PASSWORD
-    ) {
+    if(!eDate){
 
         alert(
-            "Incorrect password!"
+            "Please enter a valid Ethiopian date.\n\n" +
+            "Example: 01/01/2018"
         );
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =====================================================
-   GENERATE SCHEDULE
-===================================================== */
-
-function generateSchedule() {
-
-    scheduleElement.innerHTML = "";
-
-
-    /*
-        No date entered.
-    */
-
-    if (!startDateInput.value) {
-
-        scheduleElement.innerHTML = `
-
-            <div class="week">
-
-                <h2>
-                    Schedule Not Started
-                </h2>
-
-                <div class="week-date">
-
-                    Please enter the
-                    Schedule Start Date
-                    above.
-
-                </div>
-
-            </div>
-
-        `;
-
-        updateSummary();
 
         return;
 
@@ -875,101 +977,123 @@ function generateSchedule() {
 
 
     /*
-        Convert entered date.
+       Convert Ethiopian date to Gregorian
+       internally so JavaScript can calculate
+       weekdays correctly.
     */
 
-    const selectedDate =
-        convertToDate(
-            startDateInput.value
+    const gregorianDate =
+        ethiopianToGregorian(
+            eDate.day,
+            eDate.month,
+            eDate.year
         );
 
 
     /*
-        Get Monday of that week.
+       Find Monday of the same week.
     */
 
-    const firstMonday =
+    const monday =
         getMonday(
-            selectedDate
+            gregorianDate
         );
 
 
-    /* =================================================
-       CREATE WEEKS
-    ================================================= */
+    /*
+       Save the user's Ethiopian start date.
+    */
 
-    for (
-        let week = 1;
-        week <= TOTAL_WEEKS;
+    localStorage.setItem(
+        "maintenanceStartDate",
+        input
+    );
+
+
+    /*
+       Generate the schedule.
+    */
+
+    createSchedule(
+        monday
+    );
+
+}
+
+
+/* =========================================================
+   CREATE SCHEDULE
+========================================================= */
+
+function createSchedule(monday){
+
+    const scheduler =
+        document.getElementById(
+            "scheduler"
+        );
+
+    scheduler.innerHTML = "";
+
+
+    /*
+       5 weeks
+       3 machines per week
+       = 15 machines
+    */
+
+    for(
+        let week = 0;
+        week < 5;
         week++
-    ) {
+    ){
 
-
-        const monday =
-            addDays(
-                firstMonday,
-                (week - 1) * 7
-            );
-
-
-        const friday =
-            addDays(
-                monday,
-                4
-            );
-
-
-        const weekCard =
+        const weekDiv =
             document.createElement(
                 "div"
             );
 
-
-        weekCard.className =
+        weekDiv.className =
             "week";
 
 
-        weekCard.innerHTML = `
+        const weekHeader =
+            document.createElement(
+                "div"
+            );
 
-            <h2>
-                Week ${week}
-            </h2>
+        weekHeader.className =
+            "week-header";
 
-            <div class="week-date">
-
-                ${formatDate(monday)}
-                -
-                ${formatDate(friday)}
-
-            </div>
-
-        `;
+        weekHeader.textContent =
+            "Week " + (week + 1);
 
 
-        /* =================================================
-           MACHINES
-        ================================================= */
+        const grid =
+            document.createElement(
+                "div"
+            );
 
-        const firstMachineIndex =
-            (week - 1) *
-            MACHINES_PER_WEEK;
+        grid.className =
+            "machine-grid";
 
 
-        for (
+        /*
+           Get 3 machines for this week.
+        */
+
+        for(
             let i = 0;
-            i < MACHINES_PER_WEEK;
+            i < 3;
             i++
-        ) {
-
+        ){
 
             const machineIndex =
-                firstMachineIndex + i;
+                week * 3 + i;
 
-
-            if (
+            if(
                 machineIndex >=
-                TOTAL_MACHINES
-            ) {
+                machines.length
+            ){
 
                 break;
 
@@ -977,313 +1101,400 @@ function generateSchedule() {
 
 
             const machine =
-                MACHINES[
+                machines[
                     machineIndex
                 ];
 
 
             /*
-                Monday = 1
-                Wednesday = 3
-                Friday = 5
+               Monday / Wednesday / Friday
             */
 
-            const dayOffset =
-                MAINTENANCE_DAYS[i] - 1;
-
-
-            let maintenanceDate =
+            const maintenanceDate =
                 addDays(
                     monday,
-                    dayOffset
+                    week * 7
+                    +
+                    [0,2,4][i]
                 );
 
 
-            /*
-                Ensure weekday.
-            */
-
-            if (
-                isWeekend(
-                    maintenanceDate
-                )
-            ) {
-
-                maintenanceDate =
-                    getNextWeekday(
-                        maintenanceDate
-                    );
-
-            }
-
-
-            /*
-                Check completion.
-            */
-
-            const completed =
-                maintenanceStatus[
-                    machine.id
-                ] === true;
-
-
-            /* =================================================
-               MACHINE CARD
-            ================================================= */
-
-            const machineCard =
-                document.createElement(
-                    "div"
-                );
-
-
-            machineCard.className =
-                completed
-                    ? "machine completed"
-                    : "machine";
-
-
-            /* =================================================
-               MACHINE NAME
-            ================================================= */
-
-            const machineName =
-                document.createElement(
-                    "div"
-                );
-
-
-            machineName.className =
-                "machine-name";
-
-
-            machineName.textContent =
-                machine.name;
-
-
-            /* =================================================
-               DAY
-            ================================================= */
-
-            const maintenanceDay =
-                document.createElement(
-                    "div"
-                );
-
-
-            maintenanceDay.className =
-                "maintenance-day";
-
-
-            maintenanceDay.textContent =
-                maintenanceDate.toLocaleDateString(
-                    "en-US",
-                    {
-                        weekday: "long"
-                    }
-                );
-
-
-            /* =================================================
-               DATE
-            ================================================= */
-
-            const maintenanceDateElement =
-                document.createElement(
-                    "div"
-                );
-
-
-            maintenanceDateElement.className =
-                "maintenance-date";
-
-
-            maintenanceDateElement.textContent =
-                maintenanceDate.toLocaleDateString(
-                    "en-US",
-                    {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric"
-                    }
-                );
-
-
-            /* =================================================
-               STATUS
-            ================================================= */
-
-            const status =
-                document.createElement(
-                    "div"
-                );
-
-
-            status.className =
-                "status";
-
-
-            status.textContent =
-                completed
-                    ? "✓ Maintenance Completed"
-                    : "⚠ Maintenance Pending";
-
-
-            /* =================================================
-               BUTTON
-            ================================================= */
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.className =
-                "complete-btn";
-
-
-            if (completed) {
-
-                button.textContent =
-                    "Undo";
-
-                button.classList.add(
-                    "undo"
-                );
-
-            }
-
-            else {
-
-                button.textContent =
-                    "Mark Completed";
-
-            }
-
-
-            /* =================================================
-               BUTTON ACTION
-            ================================================= */
-
-            button.addEventListener(
-                "click",
-                function() {
-
-                    toggleMaintenance(
-                        machine.id
-                    );
-
-                }
-            );
-
-
-            /* =================================================
-               ADD ELEMENTS
-            ================================================= */
-
-            machineCard.appendChild(
-                machineName
-            );
-
-            machineCard.appendChild(
-                maintenanceDay
-            );
-
-            machineCard.appendChild(
-                maintenanceDateElement
-            );
-
-            machineCard.appendChild(
-                status
-            );
-
-            machineCard.appendChild(
-                button
-            );
-
-
-            weekCard.appendChild(
-                machineCard
+            createMachineCard(
+                grid,
+                machine,
+                maintenanceDate,
+                week + 1
             );
 
         }
 
 
-        scheduleElement.appendChild(
-            weekCard
+        weekDiv.appendChild(
+            weekHeader
+        );
+
+        weekDiv.appendChild(
+            grid
+        );
+
+        scheduler.appendChild(
+            weekDiv
         );
 
     }
 
-
-    updateSummary();
-
 }
 
 
-/* =====================================================
-   COMPLETE / UNDO
-===================================================== */
+/* =========================================================
+   CREATE MACHINE CARD
+========================================================= */
 
-function toggleMaintenance(
-    machineId
-) {
+function createMachineCard(
+    grid,
+    machine,
+    gregorianDate,
+    weekNumber
+){
+
+    const eDate =
+        gregorianToEthiopian(
+            gregorianDate
+        );
+
+
+    const dateKey =
+        createDateKey(
+            gregorianDate
+        );
+
+
+    const machineKey =
+        machine
+        + "_"
+        + dateKey;
 
 
     const isCompleted =
         maintenanceStatus[
-            machineId
+            machineKey
         ] === true;
 
 
-    /*
-        ==========================
-        UNDO
-        ==========================
-    */
+    const card =
+        document.createElement(
+            "div"
+        );
 
-    if (isCompleted) {
+    card.className =
+        "machine-card";
 
-        maintenanceStatus[
-            machineId
-        ] = false;
+
+    const machineName =
+        document.createElement(
+            "div"
+        );
+
+    machineName.className =
+        "machine-name";
+
+    machineName.textContent =
+        machine;
+
+
+    const machineDate =
+        document.createElement(
+            "div"
+        );
+
+    machineDate.className =
+        "machine-date";
+
+    machineDate.innerHTML =
+        "<strong>" +
+        getWeekdayName(
+            gregorianDate
+        ) +
+        "</strong><br>" +
+
+        formatEthiopianDate(
+            eDate
+        );
+
+
+    const status =
+        document.createElement(
+            "div"
+        );
+
+    status.className =
+        "status "
+        +
+        (
+            isCompleted
+            ? "completed"
+            : "pending"
+        );
+
+    status.textContent =
+        isCompleted
+        ? "✓ Completed"
+        : "● Pending";
+
+
+    const button =
+        document.createElement(
+            "button"
+        );
+
+
+    if(isCompleted){
+
+        button.className =
+            "undo-btn";
+
+        button.textContent =
+            "Undo Completed";
+
+        button.onclick =
+            function(){
+
+                undoMaintenance(
+                    machineKey
+                );
+
+            };
+
+    }
+    else{
+
+        button.className =
+            "complete-btn";
+
+        button.textContent =
+            "Mark Completed";
+
+        button.onclick =
+            function(){
+
+                openPasswordModal(
+                    machineKey
+                );
+
+            };
 
     }
 
 
-    /*
-        ==========================
-        COMPLETE
-        ==========================
-    */
+    card.appendChild(
+        machineName
+    );
 
-    else {
+    card.appendChild(
+        machineDate
+    );
+
+    card.appendChild(
+        status
+    );
+
+    card.appendChild(
+        button
+    );
+
+    grid.appendChild(
+        card
+    );
+
+}
 
 
-        const passwordCorrect =
-            checkPassword(
-                "Enter maintenance password:"
+/* =========================================================
+   CREATE DATE KEY
+========================================================= */
+
+function createDateKey(date){
+
+    return [
+
+        date.getUTCFullYear(),
+
+        String(
+            date.getUTCMonth() + 1
+        ).padStart(2,"0"),
+
+        String(
+            date.getUTCDate()
+        ).padStart(2,"0")
+
+    ].join("-");
+
+}
+
+
+/* =========================================================
+   PASSWORD MODAL
+========================================================= */
+
+function openPasswordModal(
+    machineKey
+){
+
+    selectedMachineKey =
+        machineKey;
+
+    document
+        .getElementById(
+            "passwordModal"
+        )
+        .style.display =
+        "flex";
+
+    document
+        .getElementById(
+            "passwordInput"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "passwordError"
+        )
+        .style.display =
+        "none";
+
+    setTimeout(
+        function(){
+
+            document
+                .getElementById(
+                    "passwordInput"
+                )
+                .focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE PASSWORD MODAL
+========================================================= */
+
+function closePasswordModal(){
+
+    document
+        .getElementById(
+            "passwordModal"
+        )
+        .style.display =
+        "none";
+
+    selectedMachineKey =
+        null;
+
+}
+
+
+/* =========================================================
+   CHECK PASSWORD
+========================================================= */
+
+function checkPassword(){
+
+    const password =
+        document
+        .getElementById(
+            "passwordInput"
+        )
+        .value;
+
+
+    if(password === PASSWORD){
+
+        maintenanceStatus[
+            selectedMachineKey
+        ] = true;
+
+
+        localStorage.setItem(
+            "maintenanceStatus",
+            JSON.stringify(
+                maintenanceStatus
+            )
+        );
+
+
+        closePasswordModal();
+
+
+        /*
+           Rebuild schedule.
+        */
+
+        const savedDate =
+            localStorage.getItem(
+                "maintenanceStartDate"
             );
 
+        if(savedDate){
 
-        if (!passwordCorrect) {
+            const eDate =
+                parseEthiopianDate(
+                    savedDate
+                );
 
-            return;
+            if(eDate){
+
+                const gDate =
+                    ethiopianToGregorian(
+                        eDate.day,
+                        eDate.month,
+                        eDate.year
+                    );
+
+                const monday =
+                    getMonday(
+                        gDate
+                    );
+
+                createSchedule(
+                    monday
+                );
+
+            }
 
         }
 
+    }
+    else{
 
-        maintenanceStatus[
-            machineId
-        ] = true;
+        document
+            .getElementById(
+                "passwordError"
+            )
+            .style.display =
+            "block";
 
     }
 
+}
 
-    /*
-        Save status.
-    */
+
+/* =========================================================
+   UNDO MAINTENANCE
+========================================================= */
+
+function undoMaintenance(
+    machineKey
+){
+
+    delete maintenanceStatus[
+        machineKey
+    ];
+
 
     localStorage.setItem(
         "maintenanceStatus",
@@ -1294,160 +1505,183 @@ function toggleMaintenance(
 
 
     /*
-        Refresh.
+       Rebuild schedule.
     */
 
-    generateSchedule();
-
-}
-
-
-/* =====================================================
-   SUMMARY
-===================================================== */
-
-function updateSummary() {
-
-
-    const completed =
-        MACHINES.filter(
-            machine =>
-                maintenanceStatus[
-                    machine.id
-                ] === true
-        ).length;
-
-
-    document.getElementById(
-        "total"
-    ).textContent =
-        TOTAL_MACHINES;
-
-
-    document.getElementById(
-        "completed"
-    ).textContent =
-        completed;
-
-
-    document.getElementById(
-        "pending"
-    ).textContent =
-        TOTAL_MACHINES -
-        completed;
-
-}
-
-
-/* =====================================================
-   START DATE CHANGE
-===================================================== */
-
-startDateInput.addEventListener(
-    "change",
-    function() {
-
-
-        const newDate =
-            startDateInput.value.trim();
-
-
-        /*
-            Empty field.
-        */
-
-        if (!newDate) {
-
-            startDateInput.value =
-                startDateInput.dataset.previousDate;
-
-            return;
-
-        }
-
-
-        /*
-            Check DD/MM/YYYY format.
-        */
-
-        if (
-            !isValidDateFormat(
-                newDate
-            )
-        ) {
-
-            alert(
-                "Invalid date.\n\n" +
-                "Please enter the date as DD/MM/YYYY.\n\n" +
-                "Example: 01/10/2026"
-            );
-
-
-            startDateInput.value =
-                startDateInput.dataset.previousDate;
-
-            return;
-
-        }
-
-
-        /*
-            Ask password.
-        */
-
-        const passwordCorrect =
-            checkPassword(
-                "Enter password to change the maintenance start date:"
-            );
-
-
-        /*
-            Wrong password.
-        */
-
-        if (!passwordCorrect) {
-
-            startDateInput.value =
-                startDateInput.dataset.previousDate;
-
-            return;
-
-        }
-
-
-        /*
-            Save date.
-        */
-
-        localStorage.setItem(
-            "maintenanceStartDate",
-            newDate
+    const savedDate =
+        localStorage.getItem(
+            "maintenanceStartDate"
         );
 
+    if(savedDate){
 
-        startDateInput.dataset.previousDate =
-            newDate;
+        const eDate =
+            parseEthiopianDate(
+                savedDate
+            );
+
+        if(eDate){
+
+            const gDate =
+                ethiopianToGregorian(
+                    eDate.day,
+                    eDate.month,
+                    eDate.year
+                );
+
+            const monday =
+                getMonday(
+                    gDate
+                );
+
+            createSchedule(
+                monday
+            );
+
+        }
+
+    }
+
+}
 
 
-        /*
-            Generate schedule.
-        */
+/* =========================================================
+   CLEAR SCHEDULE
+========================================================= */
 
-        generateSchedule();
+function clearSchedule(){
+
+    const confirmClear =
+        confirm(
+            "Are you sure you want to clear the schedule?"
+        );
+
+    if(!confirmClear){
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "maintenanceStartDate"
+    );
+
+    localStorage.removeItem(
+        "maintenanceStatus"
+    );
+
+
+    maintenanceStatus = {};
+
+
+    document
+        .getElementById(
+            "startDate"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "scheduler"
+        )
+        .innerHTML = "";
+
+
+    alert(
+        "Schedule cleared."
+    );
+
+}
+
+
+/* =========================================================
+   ENTER KEY FOR PASSWORD
+========================================================= */
+
+document
+    .getElementById(
+        "passwordInput"
+    )
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                checkPassword();
+
+            }
+
+            if(event.key === "Escape"){
+
+                closePasswordModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   LOAD SAVED START DATE
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        const savedDate =
+            localStorage.getItem(
+                "maintenanceStartDate"
+            );
+
+
+        if(savedDate){
+
+            document
+                .getElementById(
+                    "startDate"
+                )
+                .value =
+                savedDate;
+
+
+            const eDate =
+                parseEthiopianDate(
+                    savedDate
+                );
+
+
+            if(eDate){
+
+                const gDate =
+                    ethiopianToGregorian(
+                        eDate.day,
+                        eDate.month,
+                        eDate.year
+                    );
+
+
+                const monday =
+                    getMonday(
+                        gDate
+                    );
+
+
+                createSchedule(
+                    monday
+                );
+
+            }
+
+        }
 
     }
 );
 
-
-/* =====================================================
-   START APPLICATION
-===================================================== */
-
-generateSchedule();
-
 </script>
 
 </body>
-
 </html>
-
