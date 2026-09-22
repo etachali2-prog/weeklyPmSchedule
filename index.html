@@ -80,11 +80,25 @@ h1 {
 }
 
 .controls input {
-    padding: 9px 12px;
+    padding: 10px 12px;
     margin-left: 10px;
     border: 1px solid #d1d5db;
     border-radius: 6px;
     font-size: 15px;
+    width: 160px;
+}
+
+.controls input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+.date-help {
+    margin-top: 8px;
+    margin-left: 165px;
+    color: #6b7280;
+    font-size: 13px;
 }
 
 /* =========================
@@ -241,6 +255,10 @@ h1 {
         display: block;
     }
 
+    .date-help {
+        margin-left: 0;
+    }
+
 }
 
 </style>
@@ -273,7 +291,7 @@ h1 {
 
 
 <!-- =================================================
-     START DATE
+     MANUAL START DATE
 ================================================== -->
 
 <div class="controls">
@@ -282,10 +300,22 @@ h1 {
         Schedule Start Date:
     </label>
 
+    <!--
+        NORMAL TEXT INPUT
+        NO CALENDAR
+    -->
+
     <input
-        type="date"
+        type="text"
         id="startDate"
+        placeholder="DD/MM/YYYY"
+        maxlength="10"
+        autocomplete="off"
     >
+
+    <div class="date-help">
+        Enter date manually, for example: 01/10/2026
+    </div>
 
 </div>
 
@@ -540,6 +570,121 @@ else {
 
 
 /* =====================================================
+   DATE VALIDATION
+===================================================== */
+
+function isValidDateFormat(dateString) {
+
+    /*
+        Required format:
+
+        DD/MM/YYYY
+
+        Example:
+
+        01/10/2026
+    */
+
+    const pattern =
+        /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+
+    const match =
+        dateString.match(pattern);
+
+
+    if (!match) {
+
+        return false;
+
+    }
+
+
+    const day =
+        parseInt(match[1], 10);
+
+    const month =
+        parseInt(match[2], 10);
+
+    const year =
+        parseInt(match[3], 10);
+
+
+    /*
+        Basic range checking.
+    */
+
+    if (
+        month < 1 ||
+        month > 12
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        day < 1 ||
+        day > 31
+    ) {
+
+        return false;
+
+    }
+
+
+    /*
+        Create date and verify it.
+    */
+
+    const date =
+        new Date(
+            year,
+            month - 1,
+            day
+        );
+
+
+    return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+    );
+
+}
+
+
+/* =====================================================
+   CONVERT DD/MM/YYYY TO JAVASCRIPT DATE
+===================================================== */
+
+function convertToDate(dateString) {
+
+    const parts =
+        dateString.split("/");
+
+
+    const day =
+        parseInt(parts[0], 10);
+
+    const month =
+        parseInt(parts[1], 10);
+
+    const year =
+        parseInt(parts[2], 10);
+
+
+    return new Date(
+        year,
+        month - 1,
+        day
+    );
+
+}
+
+
+/* =====================================================
    DATE FUNCTIONS
 ===================================================== */
 
@@ -552,6 +697,7 @@ function isWeekend(date) {
         day === 0 ||
         day === 6
     );
+
 }
 
 
@@ -559,6 +705,7 @@ function getNextWeekday(date) {
 
     const result =
         new Date(date);
+
 
     while (
         isWeekend(result)
@@ -570,7 +717,9 @@ function getNextWeekday(date) {
 
     }
 
+
     return result;
+
 }
 
 
@@ -578,6 +727,7 @@ function getMonday(date) {
 
     const result =
         new Date(date);
+
 
     const day =
         result.getDay();
@@ -600,7 +750,9 @@ function getMonday(date) {
 
     }
 
+
     return result;
+
 }
 
 
@@ -609,11 +761,14 @@ function addDays(date, days) {
     const result =
         new Date(date);
 
+
     result.setDate(
         result.getDate() + days
     );
 
+
     return result;
+
 }
 
 
@@ -633,7 +788,7 @@ function formatDate(date) {
 
 
 /* =====================================================
-   PASSWORD FUNCTION
+   PASSWORD
 ===================================================== */
 
 function checkPassword(message) {
@@ -641,6 +796,10 @@ function checkPassword(message) {
     const enteredPassword =
         prompt(message);
 
+
+    /*
+        Cancel
+    */
 
     if (
         enteredPassword === null
@@ -650,6 +809,10 @@ function checkPassword(message) {
 
     }
 
+
+    /*
+        Wrong password
+    */
 
     if (
         enteredPassword !== PASSWORD
@@ -679,7 +842,7 @@ function generateSchedule() {
 
 
     /*
-        No date selected.
+        No date entered.
     */
 
     if (!startDateInput.value) {
@@ -711,12 +874,19 @@ function generateSchedule() {
     }
 
 
+    /*
+        Convert entered date.
+    */
+
     const selectedDate =
-        new Date(
-            startDateInput.value +
-            "T00:00:00"
+        convertToDate(
+            startDateInput.value
         );
 
+
+    /*
+        Get Monday of that week.
+    */
 
     const firstMonday =
         getMonday(
@@ -777,9 +947,8 @@ function generateSchedule() {
 
 
         /* =================================================
-           MACHINES FOR THIS WEEK
+           MACHINES
         ================================================= */
-
 
         const firstMachineIndex =
             (week - 1) *
@@ -831,7 +1000,7 @@ function generateSchedule() {
 
 
             /*
-                Check weekend.
+                Ensure weekday.
             */
 
             if (
@@ -849,7 +1018,7 @@ function generateSchedule() {
 
 
             /*
-                Completion status.
+                Check completion.
             */
 
             const completed =
@@ -893,7 +1062,7 @@ function generateSchedule() {
 
 
             /* =================================================
-               MAINTENANCE DAY
+               DAY
             ================================================= */
 
             const maintenanceDay =
@@ -916,7 +1085,7 @@ function generateSchedule() {
 
 
             /* =================================================
-               MAINTENANCE DATE
+               DATE
             ================================================= */
 
             const maintenanceDateElement =
@@ -1017,21 +1186,17 @@ function generateSchedule() {
                 machineName
             );
 
-
             machineCard.appendChild(
                 maintenanceDay
             );
-
 
             machineCard.appendChild(
                 maintenanceDateElement
             );
 
-
             machineCard.appendChild(
                 status
             );
-
 
             machineCard.appendChild(
                 button
@@ -1089,7 +1254,7 @@ function toggleMaintenance(
 
     /*
         ==========================
-        MARK COMPLETED
+        COMPLETE
         ==========================
     */
 
@@ -1129,7 +1294,7 @@ function toggleMaintenance(
 
 
     /*
-        Refresh schedule.
+        Refresh.
     */
 
     generateSchedule();
@@ -1184,11 +1349,11 @@ startDateInput.addEventListener(
 
 
         const newDate =
-            startDateInput.value;
+            startDateInput.value.trim();
 
 
         /*
-            If date is empty.
+            Empty field.
         */
 
         if (!newDate) {
@@ -1202,7 +1367,32 @@ startDateInput.addEventListener(
 
 
         /*
-            Password required.
+            Check DD/MM/YYYY format.
+        */
+
+        if (
+            !isValidDateFormat(
+                newDate
+            )
+        ) {
+
+            alert(
+                "Invalid date.\n\n" +
+                "Please enter the date as DD/MM/YYYY.\n\n" +
+                "Example: 01/10/2026"
+            );
+
+
+            startDateInput.value =
+                startDateInput.dataset.previousDate;
+
+            return;
+
+        }
+
+
+        /*
+            Ask password.
         */
 
         const passwordCorrect =
@@ -1212,7 +1402,7 @@ startDateInput.addEventListener(
 
 
         /*
-            Incorrect password.
+            Wrong password.
         */
 
         if (!passwordCorrect) {
@@ -1226,7 +1416,7 @@ startDateInput.addEventListener(
 
 
         /*
-            Save new date.
+            Save date.
         */
 
         localStorage.setItem(
@@ -1260,4 +1450,4 @@ generateSchedule();
 </body>
 
 </html>
- 
+
