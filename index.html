@@ -29,6 +29,28 @@ body {
     margin: auto;
 }
 
+/* =========================
+   BACK LINK
+========================= */
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 9px 15px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.back-link:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   TITLE
+========================= */
+
 h1 {
     text-align: center;
     margin-bottom: 8px;
@@ -39,24 +61,6 @@ h1 {
     text-align: center;
     color: #6b7280;
     margin-bottom: 25px;
-}
-
-/* =========================
-   BACK BUTTON
-========================= */
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 8px 14px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-.back-link:hover {
-    background: #1d4ed8;
 }
 
 /* =========================
@@ -95,6 +99,10 @@ h1 {
     );
     gap: 20px;
 }
+
+/* =========================
+   WEEK
+========================= */
 
 .week {
     background: white;
@@ -242,6 +250,7 @@ h1 {
 
 <body>
 
+
 <a
     class="back-link"
     href="https://etachali2-prog.github.io/all/"
@@ -252,96 +261,103 @@ h1 {
 
 <div class="container">
 
-    <h1>
-        Machine Maintenance Scheduler
-    </h1>
 
-    <p class="subtitle">
-        15 Machines • 3 Machines Per Week • Weekdays Only
-    </p>
+<h1>
+    Machine Maintenance Scheduler
+</h1>
 
 
-    <!-- =========================
-         START DATE
-    ========================== -->
+<p class="subtitle">
+    15 Machines • 3 Machines Per Week • Weekdays Only
+</p>
 
-    <div class="controls">
 
-        <label for="startDate">
-            Schedule Start Date:
-        </label>
+<!-- =================================================
+     START DATE
+================================================== -->
 
-        <input
-            type="date"
-            id="startDate"
+<div class="controls">
+
+    <label for="startDate">
+        Schedule Start Date:
+    </label>
+
+    <input
+        type="date"
+        id="startDate"
+    >
+
+</div>
+
+
+<!-- =================================================
+     SCHEDULE
+================================================== -->
+
+<div
+    id="schedule"
+    class="schedule"
+>
+</div>
+
+
+<!-- =================================================
+     SUMMARY
+================================================== -->
+
+<div class="summary">
+
+
+    <div class="summary-item">
+
+        <span
+            id="total"
+            class="number"
         >
+            15
+        </span>
+
+        Total Machines
 
     </div>
 
 
-    <!-- =========================
-         SCHEDULE
-    ========================== -->
+    <div class="summary-item">
 
-    <div
-        id="schedule"
-        class="schedule"
-    ></div>
+        <span
+            id="completed"
+            class="number"
+        >
+            0
+        </span>
 
-
-    <!-- =========================
-         SUMMARY
-    ========================== -->
-
-    <div class="summary">
-
-        <div class="summary-item">
-
-            <span
-                id="total"
-                class="number"
-            >
-                15
-            </span>
-
-            Total Machines
-
-        </div>
-
-
-        <div class="summary-item">
-
-            <span
-                id="completed"
-                class="number"
-            >
-                0
-            </span>
-
-            Completed
-
-        </div>
-
-
-        <div class="summary-item">
-
-            <span
-                id="pending"
-                class="number"
-            >
-                15
-            </span>
-
-            Pending
-
-        </div>
+        Completed
 
     </div>
+
+
+    <div class="summary-item">
+
+        <span
+            id="pending"
+            class="number"
+        >
+            15
+        </span>
+
+        Pending
+
+    </div>
+
+
+</div>
+
 
 </div>
 
 
 <script>
+
 
 /* =====================================================
    PASSWORD
@@ -351,7 +367,7 @@ const PASSWORD = "123";
 
 
 /* =====================================================
-   MACHINE SETTINGS
+   MACHINE LIST
 ===================================================== */
 
 const MACHINES = [
@@ -451,9 +467,11 @@ const TOTAL_WEEKS =
 
 
 /*
-    Monday = 1
-    Wednesday = 3
-    Friday = 5
+    Maintenance days:
+
+    Monday
+    Wednesday
+    Friday
 */
 
 const MAINTENANCE_DAYS = [
@@ -464,7 +482,7 @@ const MAINTENANCE_DAYS = [
 
 
 /* =====================================================
-   STORAGE
+   LOCAL STORAGE
 ===================================================== */
 
 let maintenanceStatus =
@@ -474,10 +492,6 @@ let maintenanceStatus =
         )
     ) || {};
 
-
-/*
-    Save selected start date separately.
-*/
 
 let savedStartDate =
     localStorage.getItem(
@@ -494,6 +508,7 @@ const scheduleElement =
         "schedule"
     );
 
+
 const startDateInput =
     document.getElementById(
         "startDate"
@@ -501,18 +516,8 @@ const startDateInput =
 
 
 /* =====================================================
-   LOAD SAVED START DATE
+   LOAD SAVED DATE
 ===================================================== */
-
-/*
-    IMPORTANT:
-
-    The date is NOT automatically set
-    to today's date.
-
-    If you already selected a date before,
-    that date will be loaded.
-*/
 
 if (savedStartDate) {
 
@@ -522,7 +527,9 @@ if (savedStartDate) {
     startDateInput.dataset.previousDate =
         savedStartDate;
 
-} else {
+}
+
+else {
 
     startDateInput.value = "";
 
@@ -582,7 +589,9 @@ function getMonday(date) {
             result.getDate() - 6
         );
 
-    } else {
+    }
+
+    else {
 
         result.setDate(
             result.getDate() -
@@ -624,7 +633,7 @@ function formatDate(date) {
 
 
 /* =====================================================
-   PASSWORD CHECK
+   PASSWORD FUNCTION
 ===================================================== */
 
 function checkPassword(message) {
@@ -632,10 +641,6 @@ function checkPassword(message) {
     const enteredPassword =
         prompt(message);
 
-
-    /*
-        User pressed Cancel.
-    */
 
     if (
         enteredPassword === null
@@ -645,10 +650,6 @@ function checkPassword(message) {
 
     }
 
-
-    /*
-        Check password.
-    */
 
     if (
         enteredPassword !== PASSWORD
@@ -678,9 +679,7 @@ function generateSchedule() {
 
 
     /*
-        If no start date has been entered,
-        show a message instead of generating
-        a schedule.
+        No date selected.
     */
 
     if (!startDateInput.value) {
@@ -708,6 +707,7 @@ function generateSchedule() {
         updateSummary();
 
         return;
+
     }
 
 
@@ -724,15 +724,16 @@ function generateSchedule() {
         );
 
 
-    /*
-        Create each week.
-    */
+    /* =================================================
+       CREATE WEEKS
+    ================================================= */
 
     for (
         let week = 1;
         week <= TOTAL_WEEKS;
         week++
     ) {
+
 
         const monday =
             addDays(
@@ -775,20 +776,22 @@ function generateSchedule() {
         `;
 
 
+        /* =================================================
+           MACHINES FOR THIS WEEK
+        ================================================= */
+
+
         const firstMachineIndex =
             (week - 1) *
             MACHINES_PER_WEEK;
 
-
-        /*
-            Create machines for this week.
-        */
 
         for (
             let i = 0;
             i < MACHINES_PER_WEEK;
             i++
         ) {
+
 
             const machineIndex =
                 firstMachineIndex + i;
@@ -805,11 +808,15 @@ function generateSchedule() {
 
 
             const machine =
-                MACHINES[machineIndex];
+                MACHINES[
+                    machineIndex
+                ];
 
 
             /*
-                Calculate maintenance date.
+                Monday = 1
+                Wednesday = 3
+                Friday = 5
             */
 
             const dayOffset =
@@ -824,7 +831,7 @@ function generateSchedule() {
 
 
             /*
-                Make sure date is weekday.
+                Check weekend.
             */
 
             if (
@@ -842,7 +849,7 @@ function generateSchedule() {
 
 
             /*
-                Check completion status.
+                Completion status.
             */
 
             const completed =
@@ -851,9 +858,9 @@ function generateSchedule() {
                 ] === true;
 
 
-            /*
-                Machine card.
-            */
+            /* =================================================
+               MACHINE CARD
+            ================================================= */
 
             const machineCard =
                 document.createElement(
@@ -867,33 +874,37 @@ function generateSchedule() {
                     : "machine";
 
 
-            /*
-                Machine name.
-            */
+            /* =================================================
+               MACHINE NAME
+            ================================================= */
 
             const machineName =
                 document.createElement(
                     "div"
                 );
 
+
             machineName.className =
                 "machine-name";
+
 
             machineName.textContent =
                 machine.name;
 
 
-            /*
-                Maintenance day.
-            */
+            /* =================================================
+               MAINTENANCE DAY
+            ================================================= */
 
             const maintenanceDay =
                 document.createElement(
                     "div"
                 );
 
+
             maintenanceDay.className =
                 "maintenance-day";
+
 
             maintenanceDay.textContent =
                 maintenanceDate.toLocaleDateString(
@@ -904,17 +915,19 @@ function generateSchedule() {
                 );
 
 
-            /*
-                Maintenance date.
-            */
+            /* =================================================
+               MAINTENANCE DATE
+            ================================================= */
 
             const maintenanceDateElement =
                 document.createElement(
                     "div"
                 );
 
+
             maintenanceDateElement.className =
                 "maintenance-date";
+
 
             maintenanceDateElement.textContent =
                 maintenanceDate.toLocaleDateString(
@@ -927,17 +940,19 @@ function generateSchedule() {
                 );
 
 
-            /*
-                Status.
-            */
+            /* =================================================
+               STATUS
+            ================================================= */
 
             const status =
                 document.createElement(
                     "div"
                 );
 
+
             status.className =
                 "status";
+
 
             status.textContent =
                 completed
@@ -945,14 +960,15 @@ function generateSchedule() {
                     : "⚠ Maintenance Pending";
 
 
-            /*
-                Button.
-            */
+            /* =================================================
+               BUTTON
+            ================================================= */
 
             const button =
                 document.createElement(
                     "button"
                 );
+
 
             button.className =
                 "complete-btn";
@@ -967,10 +983,315 @@ function generateSchedule() {
                     "undo"
                 );
 
-            } else {
+            }
+
+            else {
 
                 button.textContent =
                     "Mark Completed";
 
             }
+
+
+            /* =================================================
+               BUTTON ACTION
+            ================================================= */
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    toggleMaintenance(
+                        machine.id
+                    );
+
+                }
+            );
+
+
+            /* =================================================
+               ADD ELEMENTS
+            ================================================= */
+
+            machineCard.appendChild(
+                machineName
+            );
+
+
+            machineCard.appendChild(
+                maintenanceDay
+            );
+
+
+            machineCard.appendChild(
+                maintenanceDateElement
+            );
+
+
+            machineCard.appendChild(
+                status
+            );
+
+
+            machineCard.appendChild(
+                button
+            );
+
+
+            weekCard.appendChild(
+                machineCard
+            );
+
+        }
+
+
+        scheduleElement.appendChild(
+            weekCard
+        );
+
+    }
+
+
+    updateSummary();
+
+}
+
+
+/* =====================================================
+   COMPLETE / UNDO
+===================================================== */
+
+function toggleMaintenance(
+    machineId
+) {
+
+
+    const isCompleted =
+        maintenanceStatus[
+            machineId
+        ] === true;
+
+
+    /*
+        ==========================
+        UNDO
+        ==========================
+    */
+
+    if (isCompleted) {
+
+        maintenanceStatus[
+            machineId
+        ] = false;
+
+    }
+
+
+    /*
+        ==========================
+        MARK COMPLETED
+        ==========================
+    */
+
+    else {
+
+
+        const passwordCorrect =
+            checkPassword(
+                "Enter maintenance password:"
+            );
+
+
+        if (!passwordCorrect) {
+
+            return;
+
+        }
+
+
+        maintenanceStatus[
+            machineId
+        ] = true;
+
+    }
+
+
+    /*
+        Save status.
+    */
+
+    localStorage.setItem(
+        "maintenanceStatus",
+        JSON.stringify(
+            maintenanceStatus
+        )
+    );
+
+
+    /*
+        Refresh schedule.
+    */
+
+    generateSchedule();
+
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+function updateSummary() {
+
+
+    const completed =
+        MACHINES.filter(
+            machine =>
+                maintenanceStatus[
+                    machine.id
+                ] === true
+        ).length;
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        TOTAL_MACHINES;
+
+
+    document.getElementById(
+        "completed"
+    ).textContent =
+        completed;
+
+
+    document.getElementById(
+        "pending"
+    ).textContent =
+        TOTAL_MACHINES -
+        completed;
+
+}
+
+
+/* =====================================================
+   START DATE CHANGE
+===================================================== */
+
+startDateInput.addEventListener(
+    "change",
+    function() {
+
+
+        const newDate =
+            startDateInput.value;
+
+
+        /*
+            If date is empty.
+        */
+
+        if (!newDate) {
+
+            startDateInput.value =
+                startDateInput.dataset.previousDate;
+
+            return;
+
+        }
+
+
+        /*
+            Password required.
+        */
+
+        const passwordCorrect =
+            checkPassword(
+                "Enter password to change the maintenance start date:"
+            );
+
+
+        /*
+            Incorrect password.
+        */
+
+        if (!passwordCorrect) {
+
+            startDateInput.value =
+                startDateInput.dataset.previousDate;
+
+            return;
+
+        }
+
+
+        /*
+            Save new date.
+        */
+
+        localStorage.setItem(
+            "maintenanceStartDate",
+            newDate
+        );
+
+
+        startDateInput.dataset.previousDate =
+            newDate;
+
+
+        /*
+            Generate schedule.
+        */
+
+        generateSchedule();
+
+    }
+);
+
+
+/* =====================================================
+   START APPLICATION
+===================================================== */
+
+generateSchedule();
+
+</script>
+
+</body>
+
+</html>
 ```
+
+### Machine list in this code
+
+The list is here:
+
+```javascript
+const MACHINES = [
+```
+
+and contains:
+
+1. **TBO1**
+2. **TBO2**
+3. **KOLBUS (ONLINE)**
+4. **KOLBUS (OFFLINE)**
+5. **OSAKO**
+6. **THREE KNIFE**
+7. **SAKURAI UNIT 2**
+8. **SAKURAI UNIT 1 - A**
+9. **SAKURAI UNIT 1 - B**
+10. **LAMINATING MACHINE**
+11. **SINGLE KNIFE**
+12. **CTP**
+13. **GENERATOR**
+14. **KOMPRESSOR (WEB)**
+15. **KOMPRESSOR (KOLBUS)**
+
+The scheduler automatically divides these **15 machines into 5 weeks**, with **3 machines per week**:
+
+* **Monday → Machine 1**
+* **Wednesday → Machine 2**
+* **Friday → Machine 3**
+
+And you manually select the **Schedule Start Date**. It will not change automatically each day.
